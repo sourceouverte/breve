@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes: 
+      - redis-data:/data  # If you want data persistence
+
+  ui-service:
+    build: ./breve-ui
+    ports:
+      - "3000:80"  # React's typical dev port
+    depends_on:
+      - url-ingester-service  # Example - Client may depend on backend services 
+
+  url-ingester-service:
+    build: ./breve-ms/breve-url-ingester-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      - redis
+      
+volumes:
+  redis-data:  
