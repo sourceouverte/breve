@@ -1,42 +1,28 @@
 package org.breve.models;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
-@RedisHash("URL")
+@Setter
+@Getter
+@Document(collection = "URLS")
 public class URL implements Serializable {
 
     @Id
     private String id;
 
+    @Indexed
     private String longUrl;
 
+    @Indexed
     private String customCode;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getLongUrl() {
-        return longUrl;
-    }
-
-    public void setLongUrl(String longUrl) {
-        this.longUrl = longUrl;
-    }
-
-    public String getCustomCode() {
-        return customCode;
-    }
-
-    public void setCustomCode(String customCode) {
-        this.customCode = customCode;
-    }
+    @Indexed
+    private String description;
 
 }
