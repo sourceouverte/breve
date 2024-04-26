@@ -1,0 +1,21 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Deploy whenever there's a push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build breve-ui
+        run: | # Replace with your actual build commands
+          npm install 
+          npm run build
+
+      - name: Deploy
+        uses: actions/deploy-pages@v1
