@@ -20,6 +20,12 @@ jobs:
           cd breve-ui
           npm install 
           npm run build
+      
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: breve-ui-build  
+          path: breve-ui/build  # Adjust if your build output is in a different location 
 
       - name: Deploy
         uses: actions/deploy-pages@v1
