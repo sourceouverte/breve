@@ -28,7 +28,7 @@ jobs:
           path: breve-ui/build
 
   download-and-deploy:
-    needs: build-and-upload # Ensure the deploy job runs after the build job
+    needs: build-and-upload # Ensure the deploy job runs after the build job    
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Artifact
@@ -36,5 +36,9 @@ jobs:
         with:
           name: breve-ui-build 
 
-      - name: Deploy 
-        uses: actions/deploy-pages@v1  # Adjust if your build output is in a different location 
+      - name: Deploy with gh-pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
+          env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
