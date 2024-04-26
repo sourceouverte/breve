@@ -1,6 +1,0 @@
-{
-    "yaml.schemas": {
-        "file:///c%3A/Users/madhu/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
-        "https://raw.githubusercontent.com/deployphp/deployer/master/src/schema.json": "file:///f%3A/Playground/breve/breve-ui/.github/workflows/deploy.yml"
-    }
-}
