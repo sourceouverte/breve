@@ -38,6 +38,7 @@ jobs:
 
       - name: Deploy with gh-pages
         run: |
+          ls -lart
           cd breve/breve-ui
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
