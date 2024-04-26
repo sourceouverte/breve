@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build Breve UI & Deploy to GitHub Pages
 
 on:
   push:
@@ -14,6 +14,7 @@ jobs:
 
       - name: Build breve-ui
         run: | # Replace with your actual build commands
+          cd breve-ui
           npm install 
           npm run build
 
