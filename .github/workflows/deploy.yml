@@ -6,7 +6,7 @@ on:
       - main # Deploy whenever there's a push to the main branch
 
 jobs:
-  build-and-deploy:
+  build-and-upload:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,7 +25,16 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: breve-ui-build  
-          path: breve-ui/build  # Adjust if your build output is in a different location 
+          path: breve-ui/build
 
-      - name: Deploy
-        uses: actions/deploy-pages@v1
+  deploy:
+    needs: build-and-upload # Ensure the deploy job runs after the build job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: breve-ui-build 
+
+      - name: Deploy 
+        uses: actions/deploy-pages@v1  # Adjust if your build output is in a different location 
