@@ -9,11 +9,11 @@ jobs:
   build-and-upload:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       id-token: write # Required for accessing the GitHub Pages API
+      contents: read
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build breve-ui
         run: | # Replace with your actual build commands
@@ -22,17 +22,17 @@ jobs:
           npm run build
       
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: breve-ui-build  
           path: breve-ui/build
 
-  deploy:
+  download-and-deploy:
     needs: build-and-upload # Ensure the deploy job runs after the build job
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: breve-ui-build 
 
