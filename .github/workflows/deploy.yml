@@ -24,6 +24,11 @@ jobs:
         working-directory: ./breve-ui
         run: npm run build
 
+      - name: Configure Git Identity
+        run: |
+          git config --global user.email "madhurahuja@duck.com"
+          git config --global user.name "Maddy"
+
       - name: Deploy
         working-directory: ./breve-ui
         run: npm run deploy
