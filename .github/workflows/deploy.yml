@@ -1,49 +1,29 @@
-name: Build Breve UI & Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main # Deploy whenever there's a push to the main branch
+    branches: [ main ]  
 
 jobs:
-  build-and-upload:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # Required for accessing the GitHub Pages API
-      contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Build breve-ui
-        run: | # Replace with your actual build commands
-          cd breve-ui
-          npm install 
-          npm run build
-      
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          name: breve-ui-build  
-          path: breve-ui/build
+          node-version: '18'  # Or your preferred version
 
-  download-and-deploy:
-    needs: build-and-upload # Ensure the deploy job runs after the build job    
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: breve-ui-build 
+      - name: Install Dependencies
+        working-directory: ./breve-ui 
+        run: npm ci  
 
-      - name: Deploy with gh-pages
-        run: |
-          ls -lart
-          cd ..
-          ls -lart
-          cd ..
-          ls -lart
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build React App
+        working-directory: ./breve-ui
+        run: npm run build
+
+      - name: Deploy
+        working-directory: ./breve-ui
+        run: npm run deploy
