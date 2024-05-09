@@ -24,7 +24,7 @@ jobs:
         working-directory: ./breve-ui
         run: npm run build
         env:
-          PUBLIC_URL: "https://breve.madhurahuja.com/"
+          PUBLIC_URL: "https://breve.madhurahuja.com"
 
       - name: Configure Git Identity
         run: |
