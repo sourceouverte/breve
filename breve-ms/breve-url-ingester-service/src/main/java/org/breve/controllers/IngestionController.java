@@ -36,11 +36,6 @@ public class IngestionController {
         return ingestionService.updateURL(inputDto);
     }
 
-    @GetMapping("/urls/{customCode}")
-    public Optional<URLS> getURLByCustomCode(@PathVariable String customCode) {
-        return ingestionService.getURLByCustomCode(customCode);
-    }
-
     @PostMapping("/ingest")
     public ResponseEntity<SuccessResponse> ingest(@RequestBody IngestionInputDto inputDto) throws InvalidUrlException, IOException, URISyntaxException {
         try {
@@ -53,9 +48,9 @@ public class IngestionController {
         return null;
     }
 
-    @GetMapping("url/{shortCode}")
-    public void redirectToLongUrl(@PathVariable String shortCode, HttpServletResponse response) {
-        Optional<URLS> longUrl = ingestionService.getURLByCustomCode(shortCode);
+    @GetMapping("/{customCode}")
+    public void redirectToLongUrl(@PathVariable String customCode, HttpServletResponse response) {
+        Optional<URLS> longUrl = ingestionService.getURLByCustomCode(customCode);
         String s = longUrl.map(URLS::getLongUrl).orElse(null);
         try {
             response.sendRedirect(s);
