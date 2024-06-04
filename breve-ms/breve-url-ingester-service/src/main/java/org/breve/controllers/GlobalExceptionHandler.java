@@ -1,6 +1,5 @@
 package org.breve.controllers;
 
-import org.breve.controllers.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,15 +21,16 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse("Unknown host", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     @ExceptionHandler(CodeAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleCodeAlreadyExistsException(CodeAlreadyExistsException ex) {
         ErrorResponse errorResponse = new ErrorResponse("Code already exists", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
         ErrorResponse errorResponse = new ErrorResponse("An exception occurred", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }

@@ -74,40 +74,11 @@ public class IngestionService {
                 connection.setRequestMethod("HEAD");
                 connection.connect();
                 int responseCode = connection.getResponseCode();
-
                 System.out.println("response code" + responseCode);
-
-                //  if (responseCode >= 200 && responseCode <= 399) {
-//
                 url.setCustomCode(URLShorteningService.shortenURL(inputDto.getLongUrl()));
                 url.setDescription(inputDto.getDescription());
                 urlRepository.save(url);
             }
         }
     }
-
-
-    private <e> boolean isValidUrl(String url) {
-        // If no exception is thrown, URL is valid
-        try {
-            // Attempt to create a URL object
-            // If the URL is properly formatted, return true
-            return true;
-        } catch (RuntimeException e) {
-            // If a MalformedURLException is thrown, the URL is not valid
-            return false;
-        }
-    }
-
-    private boolean isCustomCodeUnique(String customCode) {
-        // Check if custom code is unique in the database
-        // Return true if unique, false otherwise
-        return true;
-    }
-
-    private String generateShortCode(String longUrl) {
-        // Implement short code generation using hashing and Base62 encoding
-        return "Success";
-    }
-
 }
