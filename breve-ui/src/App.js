@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import MyURLs from './components/MyURLs/MyURLs';
+// import MyURLs from './components/MyURLs/MyURLs';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         >
           Learn React
         </a>
-        <MyURLs />
+        {/* <MyURLs /> */}
       </header>
     </div>
   );

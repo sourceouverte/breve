@@ -3,6 +3,7 @@ package org.breve.controllers;
 import org.breve.dtos.IngestionInputDto;
 import org.breve.models.URL;
 import org.breve.services.IngestionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,4 +33,5 @@ public class IngestionController {
     public Optional<URL> getURLByCustomCode(@PathVariable String customCode) {
         return ingestionService.getURLByCustomCode(customCode);
     }
+
 }

@@ -15,11 +15,19 @@ services:
       - "3000:80"  # React's typical dev port
     depends_on:
       - url-ingester-service  # Example - Client may depend on backend services 
+      - url-shortner-service  # Example - Client may depend on backend services 
 
   url-ingester-service:
     build: ./breve-ms/breve-url-ingester-service
     ports:
       - "8081:8080"
+    depends_on:
+      - mongodb
+
+  url-shortner-service:
+    build: ./breve-ms/breve-url-shortner-service
+    ports:
+      - "8082:8082"
     depends_on:
       - mongodb
       
