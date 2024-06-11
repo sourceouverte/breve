@@ -10,6 +10,7 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(MongoClients.create(), "breve-db");
+        String connectionString = "mongodb://brevemongodb:27017";
+        return new MongoTemplate(MongoClients.create(connectionString), "breve-db");
     }
 }

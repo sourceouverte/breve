@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-@RestController("ingester")
+@RestController
 @RequestMapping("/ingester")
 public class IngestionController {
 
