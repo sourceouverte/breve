@@ -1,7 +1,8 @@
 version: '3'
 
 services:
-  mongodb:
+  brevemongodb:
+    container_name: brevemongodb
     image: mongo:latest  # Or specify a specific version like 'mongo:6.0'
     restart: always      # Restart policy for service
     ports:
@@ -18,10 +19,13 @@ services:
 
   url-ingester-service:
     build: ./breve-ms/breve-url-ingester-service
+    container_name: url-ingester-service
     ports:
       - "8081:8080"
     depends_on:
-      - mongodb
+      - brevemongodb  # Example - Backend service may depend on database service
+    links:
+      - brevemongodb  # Example - Backend service may depend on database service
       
 volumes:
-  mongodb_data:  
+  mongodb_data:  # Volume for MongoDB data
